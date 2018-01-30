@@ -1,5 +1,5 @@
 // This is an implementation of a multiplicative extended kalman filter (MEKF) based on
-// the "Derivation of the Relative Multiplicative Kalman Filter" by David Wheeler and 
+// the "Derivation of the Relative Multiplicative Kalman Filter" by David Wheeler and
 // Daniel Koch
 
 #include "mekf/mekf.h"
@@ -36,9 +36,9 @@ kalmanFilter::kalmanFilter() :
   // setup publishers and subscribers
   imu_sub_    = nh_.subscribe("imu/data", 1, &kalmanFilter::imuCallback, this);
   baro_sub_   = nh_.subscribe("baro", 1, &kalmanFilter::baroCallback, this);
-  sonar_sub_  = nh_.subscribe("sonar", 1, &kalmanFilter::sonarCallback, this);
-  mag_sub_    = nh_.subscribe("magnetometer", 1, &kalmanFilter::magCallback, this);
-  gps_sub_    = nh_.subscribe("gps/data", 1, &kalmanFilter::gpsCallback, this);
+  // sonar_sub_  = nh_.subscribe("sonar", 1, &kalmanFilter::sonarCallback, this);
+  // mag_sub_    = nh_.subscribe("magnetometer", 1, &kalmanFilter::magCallback, this);
+  // gps_sub_    = nh_.subscribe("gps/data", 1, &kalmanFilter::gpsCallback, this);
   status_sub_ = nh_.subscribe("status", 1, &kalmanFilter::statusCallback, this);
   // att_sub_    = nh_.subscribe("attitude", 1, &kalmanFilter::attitudeCallback, this);
 
@@ -85,7 +85,7 @@ void kalmanFilter::imuCallback(const sensor_msgs::Imu msg)
   // wait for sufficient acceleration to start the filter
   if(!flying_)
   {
-    if(fabs(acc_z_) > 9.9 && armed_)
+    if(fabs(acc_z_) > 0.0 && armed_)
     {
       // filter initialization stuff
       ROS_WARN("Now flying!");
@@ -555,6 +555,3 @@ void kalmanFilter::publishEstimate()
 
 
 } // namespace mekf
-
-
-

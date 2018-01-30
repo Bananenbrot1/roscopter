@@ -1,10 +1,10 @@
 <launch>
 
   <!-- Simulation -->
-  <include file="$(find rosflight_sim)/launch/base.launch">
+  <!-- <include file="$(find rosflight_sim)/launch/base.launch">
     <arg name="mav_name" value="multirotor"/>
     <arg name="world_file" value="$(find leo_sim)/worlds/light_sim.world"/>
-  </include>
+  </include> -->
 
   <!-- FCU communication -->
   <node name="rosflight_io" pkg="rosflight" type="rosflight_io" output="screen">
@@ -19,20 +19,20 @@
 
 
   <!-- RC -->
-  <node name="rc_joy" pkg="rosflight_joy" type="rc_joy">
+  <!-- <node name="rc_joy" pkg="rosflight_joy" type="rc_joy">
     <remap from="RC" to="multirotor/RC"/>
-  </node>
+  </node> -->
 
   <!-- Control -->
-  <node name="controller" pkg="roscopter" type="controller" output="screen">
+  <!-- <node name="controller" pkg="roscopter" type="controller" output="screen">
     <remap from="estimate" to="multirotor/truth/NED"/>
-  </node>
+  </node> -->
 
   <!-- Waypoint Management -->
-  <node name="waypoint_manager" pkg="roscopter" type="waypoint_manager.py">
+  <!-- <node name="waypoint_manager" pkg="roscopter" type="waypoint_manager.py"> -->
     <!-- <remap from="state" to="estimate"/> -->
-    <remap from="state" to="multirotor/truth/NED"/>
-  </node>
+    <!-- <remap from="state" to="multirotor/truth/NED"/>
+  </node> -->
 
   <!-- plot states -->
   <!-- <node pkg="roscopter" type="states_plotter.py" name="states_plotter" output="screen">
